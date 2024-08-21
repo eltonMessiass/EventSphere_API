@@ -1,12 +1,28 @@
 from rest_framework import serializers
 from .models import User
+from django.core.exceptions import ValidationError
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password']
-        extra_kwargs = {"password": {"write_only":True} }
+        extra_kwargs = {
+            "password": {"write_only":True},
+            'username': {"required": True},
+            'email': {
+                'error_messages': {
+                    'required': 'O email é obrigatório.',
+                    'null': 'O email não pode ser nulo.'
+                }
+            }
+        }
+
+    def validate_username(self, username):
+        if User.objects.filter(username=username).exists():
+            print("Existe")
+            raise serializers.ValidationError("This username is already in use!")
+        return username
     
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -17,3 +33,5 @@ class UserSerializer(serializers.ModelSerializer):
             password = validated_data['password']
         )
         return user
+    
+
