@@ -38,10 +38,14 @@ def user_detail(request, id):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+@api_view(["GET"])
+def profileView(request):
+    profiles = Profile.objects.all()
+    serializer = ProfileSerilizer(profiles, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["GET", "PUT"])
-def profileView(request, id):
+def profileDetailView(request, id):
     profile = get_object_or_404(Profile, id=id) 
     if request.method == "GET":
         serializer = ProfileSerilizer(profile)
@@ -51,7 +55,8 @@ def profileView(request, id):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response("Erroirrrrr")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
     
 
 @api_view(["GET", "PUT"])

@@ -33,6 +33,8 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(
         max_length=9,
+        blank=True,
+        null=True,
         validators=[
             RegexValidator(
                 regex=r'^8[2-7]\d{7}$',
