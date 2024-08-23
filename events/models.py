@@ -15,6 +15,7 @@ class Event(models.Model):
         ('completed', 'completed'),
         ('canceled', 'canceled'),
     ]
+
     name = models.CharField(max_length=255)
     descriptiom = models.TextField()
     start_time = models.DateTimeField()

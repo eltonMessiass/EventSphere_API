@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Profile
+
 from django.core.exceptions import ValidationError
 
 
@@ -35,3 +36,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 
+
+class ProfileSerilizer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Profile
+        fields = ["id", "user", "role", "profile_picture", "bio", "birth_date", "phone_number"]
+        extra_kwargs = {"user":{"read_only": True}, "profile_picture":{"required": False}}
+        

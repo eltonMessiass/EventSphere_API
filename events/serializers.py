@@ -16,3 +16,4 @@ class EventSerializer(serializers.ModelSerializer):
         if value < 0:
             raise serializers.ValidationError("The price cannot be negative")
         
+        
