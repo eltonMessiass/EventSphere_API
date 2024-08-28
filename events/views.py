@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from .models import Event, Category, Tag
-from .serializers import EventSerializer, CategorySerializer
+from .serializers import EventSerializer, CategorySerializer, TagSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -59,5 +59,13 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     
-    
+
+class TagLIST(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class TagDetail(generics.RetrieveDestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
         

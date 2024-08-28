@@ -32,3 +32,9 @@ class CategorySerializer(serializers.ModelSerializer):
         )
         category.save()
         return category
+    
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ["id", "name"]
