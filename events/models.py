@@ -17,7 +17,7 @@ class Event(models.Model):
     ]
 
     name = models.CharField(max_length=255)
-    descriptiom = models.TextField()
+    description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     location = models.CharField(max_length=255)

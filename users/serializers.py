@@ -19,11 +19,11 @@ class UserSerializer(serializers.ModelSerializer):
             }
         }
 
-    def validate_username(self, username):
-        if User.objects.filter(username=username).exists():
-            print("Existe")
-            raise serializers.ValidationError("This username is already in use!")
-        return username
+    # def validate_username(self, username):
+    #     if User.objects.filter(username=username).exists():
+    #         print("Existe")
+    #         raise serializers.ValidationError("This username is already in use!")
+    #     return username
     
     def create(self, validated_data):
         user = User.objects.create_user(
