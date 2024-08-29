@@ -1,8 +1,8 @@
 from django.db import models
 from users.models import User
-from events.models import Event
 
-# Create your models here.
+
+
 class Enrollment(models.Model):
     STATUS_CHOICES = [
         ('confirmed', 'Confirmed'),

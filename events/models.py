@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from enrollments.models import Enrollment
 
 # Create your models here.
 class Category(models.Model):
@@ -32,7 +33,11 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField('Tag', related_name='events', blank=True)
+    participants = models.ManyToManyField(User, blank=True, null=True, related_name='events')
 
+    def is_full(self):
+        return self.participants.count() >= self.max_capacity
+    
 
     def __str__(self):
         return self.name
