@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import userView, user_detail,profileDetailView, profileView, logged_user_profile
 
+
 urlpatterns = [
     path('signup/', userView, name='signup'),
     path('login/', TokenObtainPairView.as_view(), name="get_token"),

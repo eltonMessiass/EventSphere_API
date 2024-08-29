@@ -45,7 +45,17 @@ INSTALLED_APPS = [
     "corsheaders",
     'users',
     'events',
+    'enrollments',
+    'drf_yasg',
 ]
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        }
+    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
