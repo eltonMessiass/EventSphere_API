@@ -13,6 +13,7 @@ from rest_framework.response import Response
 #     serializer_class = EnrollmentSerializer
 
 class EnrollmentLIST(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post(self, request, format=None):
         serializer = EnrollmentSerializer(data=request.data)
         if serializer.is_valid():
@@ -30,6 +31,7 @@ class EnrollmentLIST(APIView):
         
 
 class Enrolled_to_specific_Event(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self, request, pk, format=None):
         data = Enrollment.objects.filter(event=pk)
         serializer = EnrollmentSerializer(data, many=True)
@@ -43,11 +45,13 @@ class EnrollmentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TicketLIST(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
  
 
 class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 
