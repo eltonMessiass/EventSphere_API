@@ -22,6 +22,19 @@ class EnrollmentLIST(APIView):
             serializer.save()
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+    def get(self, request, format=None):
+        obj = Enrollment.objects.all()
+        serializer = EnrollmentSerializer(obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+
+class Enrolled_to_specific_Event(APIView):
+    def get(self, request, pk, format=None):
+        data = Enrollment.objects.filter(event=pk)
+        serializer = EnrollmentSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class EnrollmentDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -32,7 +45,7 @@ class EnrollmentDetail(generics.RetrieveUpdateDestroyAPIView):
 class TicketLIST(generics.ListCreateAPIView):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
-
+ 
 
 class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ticket.objects.all()
